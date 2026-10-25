@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- ป้องกัน Safari ทำตัวเลขเป็นลิงก์สีน้ำเงิน -->
+  <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
   <title>Nangmilo ♡</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +17,7 @@
 
   <style>
     :root {
-      /* โทนสีตามภาพพาเลท: เทาควันบุหรี่ + ชาร์โคล + ชมพูบลัชไอซี่ + ขาวครีมนวล */
+      /* โทนสีตามภาพพาเลท */
       --color-charcoal: #545258;
       --color-grey-soft: #8e8b94;
       --color-grey-light: #dcd7dc;
@@ -25,7 +27,6 @@
       --card-bg: rgba(255, 255, 255, 0.95);
       
       --border-tone: rgba(181, 140, 164, 0.35);
-      --border-accent: #78747f;
       --text-dark: #2f2d33;
       --text-muted: #6e6973;
       --shadow-soft: 0 10px 25px rgba(84, 82, 88, 0.08), 0 4px 15px rgba(235, 219, 227, 0.3);
@@ -49,6 +50,12 @@
       position: relative;
       background: radial-gradient(circle at top left, #faf8f9 0%, var(--color-bg-cream) 45%, #efe9ee 80%, #e7e2e6 100%);
       overflow-x: hidden;
+    }
+
+    /* ป้องกันสีน้ำเงินบน Safari iOS สำหรับตัวเลขทุกจุด */
+    a[href^="tel"], span, div, p {
+      color: inherit;
+      text-decoration: none !important;
     }
 
     .container {
@@ -221,8 +228,8 @@
     .float-item {
       position: absolute;
       bottom: -70px;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       object-fit: contain;
       animation: floatMotion 12s linear infinite;
       opacity: 0.85;
@@ -409,6 +416,13 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
 
+    /* บังคับสีข้อความตัวเลขบัญชีให้เป็นสีชาร์โคล ไม่เป็นสีน้ำเงิน */
+    .bank-acc-num, .wallet-acc-num {
+      color: var(--color-charcoal) !important;
+      font-weight: 700;
+      text-decoration: none !important;
+    }
+
     .copy-pill-btn {
       display: flex;
       align-items: center;
@@ -421,6 +435,7 @@
       cursor: pointer;
       font-size: 13.5px;
       font-weight: 600;
+      color: var(--text-dark);
       transition: background 0.15s;
     }
     .copy-pill-btn:active { background: #fdfafb; }
@@ -602,7 +617,7 @@
       </div>
     </div>
 
-    <!-- 2. แท็บ nangmilo shop ♡ (เลือกสินค้าที่ต้องการสั่งซื้อ) -->
+    <!-- 2. แท็บ nangmilo shop ♡ -->
     <div class="tab-view" id="tab-apps">
       <div class="glass-card" style="padding-bottom:20px;">
         <h2 style="font-size:17px; font-weight:700; color:var(--color-charcoal); text-align:center; margin-bottom:4px;">
@@ -615,26 +630,26 @@
       </div>
     </div>
 
-    <!-- 3. แท็บ payment ♡ (ช่องทางชำระเงิน + รับซอง + แนบสลิป Thunder) -->
+    <!-- 3. แท็บ payment ♡ -->
     <div class="tab-view" id="tab-topup">
       <div class="glass-card">
         <h2 style="font-size:16.5px; font-weight:700; color:var(--color-charcoal); text-align:center; margin-bottom:12px;">
           payment ♡
         </h2>
 
-        <!-- กล่องข้อความอันใหญ่ -->
+        <!-- กล่องข้อความอันใหญ่ (ป้องกันสีน้ำเงิน) -->
         <div class="payment-main-box">payment nangmilo shop ♡
 
-k-bank : 1613322163
-wallet : 0863121107</div>
+k-bank : <span class="bank-acc-num">1613322163</span>
+wallet : <span class="wallet-acc-num">0863121107</span></div>
 
-        <!-- กล่องคัดลอกเลขบัญชี และวอลเล็ต -->
+        <!-- กล่องคัดลอกเลขบัญชี และวอลเล็ต (ป้องกันสีน้ำเงิน) -->
         <div class="copy-pill-btn" onclick="copyText('1613322163', 'คัดลอกเลขบัญชี kasikorn แล้ว')">
-          <span>🏦 kasikorn : 1613322163</span>
+          <span>🏦 kasikorn : <span class="bank-acc-num">1613322163</span></span>
           <span style="color:var(--color-charcoal); font-size:12px; font-weight:700;">คัดลอก</span>
         </div>
         <div class="copy-pill-btn" onclick="copyText('0863121107', 'คัดลอกเบอร์ wlt แล้ว')">
-          <span>👛 wlt: 0863121107</span>
+          <span>👛 wlt: <span class="wallet-acc-num">0863121107</span></span>
           <span style="color:var(--color-charcoal); font-size:12px; font-weight:700;">คัดลอก</span>
         </div>
 
@@ -644,7 +659,7 @@ wallet : 0863121107</div>
           <span style="color:var(--color-charcoal); font-size:12px; font-weight:700;">คัดลอก</span>
         </div>
 
-        <!-- กล่องรับซอง TrueMoney Wallet อัตโนมัติ เข้าเบอร์ 0863121107 -->
+        <!-- กล่องรับซอง TrueMoney Wallet -->
         <div class="voucher-card-box">
           <div style="font-weight:700; font-size:14px; color:var(--color-charcoal); margin-bottom:4px;">🧧 เติมเงินด้วยซองของขวัญ TrueMoney Wallet</div>
           <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">สร้างซองของขวัญแบบแบ่งยอดเท่ากัน 1 คน แล้ววางลิงก์ซองที่นี่ได้เลยค่ะ</div>
@@ -708,7 +723,7 @@ wallet : 0863121107</div>
     </div>
   </div>
 
-  <!-- Modal 3: รีเซ็ตรหัสผ่านตรงผ่าน Firestore -->
+  <!-- Modal 3: รีเซ็ตรหัสผ่าน -->
   <div class="app-modal" id="forgotModal">
     <div class="app-modal-content">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
@@ -752,7 +767,6 @@ wallet : 0863121107</div>
     if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    // ฐานข้อมูลแยกเฉพาะของร้าน Nangmilo ไม่ปะปนกับที่อื่น
     const DB_SITE = "nangmilo_site_config";
     const DB_APPS = "nangmilo_shop_apps";
     const DB_ORDERS = "nangmilo_shop_orders";
@@ -760,9 +774,13 @@ wallet : 0863121107</div>
     const DB_SLIPS = "nangmilo_shop_slips";
     const DB_VOUCHERS = "nangmilo_shop_vouchers";
 
-    // Thunder Solution API Key
     const THUNDER_API_KEY = "9c131513-c62d-47ec-9200-a026b1a17dbf";
     const STORE_WALLET_PHONE = "0863121107";
+
+    // ลิงก์รูปภาพที่กำหนดตรง 100%
+    const DEFAULT_PROFILE_IMG = "https://files.catbox.moe/eugyqk.jpeg";
+    const DEFAULT_BANNER_IMG = "https://files.catbox.moe/qfm6ke.gif";
+    const DEFAULT_FLOAT_PNG = "https://files.catbox.moe/2tryl9.png";
 
     let currentUser = null;
     let userData = { balance: 0 };
@@ -978,14 +996,15 @@ wallet : 0863121107</div>
 
     checkStoredUser();
 
-    // ดึงข้อมูลร้าน
+    // ดึงข้อมูลร้าน โดยล็อกรูปภาพให้ใช้รูปใหม่ที่ระบุแน่นอน
     db.collection(DB_SITE).doc("config").onSnapshot(doc => {
       if (doc.exists) {
         const d = doc.data();
         if (d.shopName) document.getElementById('shopNameText').textContent = d.shopName;
         if (d.shopBio) document.getElementById('shopBioText').textContent = d.shopBio;
-        if (d.bannerImg) document.getElementById('bannerImg').src = d.bannerImg;
-        if (d.profileImg) document.getElementById('profileImg').src = d.profileImg;
+        // ล็อกให้ใช้รูปใหม่ถ้าไม่มีการแก้ไขเป็นรูปอื่น
+        document.getElementById('bannerImg').src = d.bannerImg || DEFAULT_BANNER_IMG;
+        document.getElementById('profileImg').src = d.profileImg || DEFAULT_PROFILE_IMG;
         if (d.musicUrl && music.src !== d.musicUrl) music.src = d.musicUrl;
       }
     });
@@ -1169,12 +1188,11 @@ wallet : 0863121107</div>
       });
     }
 
-    // ฟังก์ชันคัดลอกข้อความ
     function copyText(str, msg) {
       navigator.clipboard.writeText(str).then(() => alert(msg));
     }
 
-    // 1. ตรวจสอบสลิปโอนเงินผ่าน Thunder Solution API
+    // ตรวจสอบสลิปโอนเงินผ่าน Thunder Solution API
     async function handleThunderSlipUpload(event) {
       if (!currentUser) {
         alert('กรุณาเข้าสู่ระบบก่อนแนบสลิปเติมเงินนะคะ ♡');
@@ -1216,7 +1234,6 @@ wallet : 0863121107</div>
           throw new Error('ไม่พบเลขอ้างอิงในสลิป กรุณาใช้สลิปที่มี QR Code ชัดเจนนะคะ');
         }
 
-        // ตรวจสอบว่าสลิปนี้เคยใช้ไปแล้วหรือไม่
         const slipDoc = await db.collection(DB_SLIPS).doc(transRef).get();
         if (slipDoc.exists) {
           alert('สลิปนี้เคยใช้งานเติมเงินไปแล้ว ไม่สามารถใช้ซ้ำได้ค่ะ ❌');
@@ -1232,7 +1249,6 @@ wallet : 0863121107</div>
           return alert('ยอดเงินไม่ถูกต้อง ยกเลิกการทำรายการค่ะ');
         }
 
-        // เติมเงินเข้ากระเป๋าบัญชีผู้ใช้ทันที
         await db.runTransaction(async t => {
           const uRef = db.collection(DB_USERS).doc(currentUser.docId);
           const uDoc = await t.get(uRef);
@@ -1258,7 +1274,7 @@ wallet : 0863121107</div>
       }
     }
 
-    // 2. รับซองของขวัญ TrueMoney Wallet อัตโนมัติ เข้าเบอร์ 0863121107
+    // รับซองของขวัญ TrueMoney Wallet อัตโนมัติ เข้าเบอร์ 0863121107
     async function handleRedeemVoucher() {
       if (!currentUser) {
         alert('กรุณาเข้าสู่ระบบก่อนรับซองเติมเงินนะคะ ♡');
@@ -1271,13 +1287,11 @@ wallet : 0863121107</div>
 
       if (!voucherUrl) return alert('กรุณาวางลิงก์ซองของขวัญ TrueMoney Wallet ค่ะ');
 
-      // แยก hash ของซอง
       const hashMatch = voucherUrl.match(/v=([a-zA-Z0-9]+)/);
       const voucherHash = hashMatch ? hashMatch[1] : voucherUrl.replace(/[^a-zA-Z0-9]/g, '');
 
       if (!voucherHash) return alert('รูปแบบลิงก์ซองของขวัญไม่ถูกต้องค่ะ');
 
-      // เช็กใน Firestore ป้องกันการส่งซองซ้ำ
       const vDoc = await db.collection(DB_VOUCHERS).doc(voucherHash).get();
       if (vDoc.exists) {
         return alert('ซองของขวัญนี้เคยใช้งานไปแล้วค่ะ ❌');
@@ -1288,7 +1302,6 @@ wallet : 0863121107</div>
       btn.textContent = 'กำลังรับเงินจากซอง...';
 
       try {
-        // ยิง API รับซองเข้าเบอร์ 0863121107
         const redeemRes = await fetch(`https://gift.truemoney.com/campaign/vouchers/${voucherHash}/redeem`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1332,11 +1345,11 @@ wallet : 0863121107</div>
       }
     }
 
-    // รูปลอย 2tryl9.png
+    // รูปลอย 2tryl9.png ตรงตามบรีฟ
     const floatBox = document.getElementById('floatContainer');
     setInterval(() => {
       const el = document.createElement('img');
-      el.src = 'https://files.catbox.moe/2tryl9.png';
+      el.src = DEFAULT_FLOAT_PNG;
       el.className = 'float-item';
       el.style.left = (Math.random() * 90) + 'vw';
       el.style.animationDuration = (8 + Math.random() * 6) + 's';
