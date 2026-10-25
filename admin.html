@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Admin Dashboard ♡ Nangmilo</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
@@ -131,7 +130,7 @@
       </div>
     </div>
 
-    <!-- แถบ 2: จัดการแอพ & สต็อกแบบฟอร์มยาวๆ -->
+    <!-- แถบ 2: จัดการแอพ & สต็อก -->
     <div class="tab-content" id="tab-apps">
       <div class="card">
         <div class="title">📱 จัดการกล่องแอพ & เติมแบบฟอร์มสต็อก</div>
@@ -193,7 +192,6 @@
   const DB_APPS = "nangmilo_shop_apps";
   const DB_USERS = "nangmilo_shop_users";
 
-  // ข้อมูลแอดมินตามบรีฟ
   let adminUsername = "moonlightbae";
   let adminEmail = "Gplusgplus500@gmail.com";
   let adminPass = "Meow4U!7";
@@ -214,7 +212,6 @@
     const inputVal = document.getElementById('loginEmail').value.trim();
     const p = document.getElementById('loginPassword').value.trim();
     
-    // รองรับทั้งการเข้าสู่ระบบด้วย Username หรือ Email
     const isUserMatch = (inputVal === adminUsername || inputVal.toLowerCase() === adminEmail.toLowerCase());
     
     if (isUserMatch && p === adminPass) {
@@ -240,6 +237,7 @@
       const d = doc.exists ? doc.data() : {};
       document.getElementById('cfgShopName').value = d.shopName || "Nangmilo";
       document.getElementById('cfgShopBio').value = d.shopBio || `สวัสดีค่าเว็ปร้านนังไมโลเองงย้ายมาในนี้ หลังซื้อขายบริการฝาก+1ให้ทีนะคะ ขอบคุณมากๆที่สนับสนุนร้านเราค่ะ รับทำป้ายเครดิต ป้ายidentity v ป้ายต่างๆสามารถสอบถามเพิ่มเติมได้ค่า\nมีปัญหาแจ้งไลน์ siamfineshyt  ไม่มี @ ค่ะ ♡`;
+      // กำหนดค่าเริ่มต้นให้ตรงกับรูปใหม่
       document.getElementById('cfgBanner').value = d.bannerImg || "https://files.catbox.moe/qfm6ke.gif";
       document.getElementById('cfgProfile').value = d.profileImg || "https://files.catbox.moe/eugyqk.jpeg";
       document.getElementById('cfgMusic').value = d.musicUrl || "https://file.garden/asG8Gt-rqWIpi3II/Ariana%20Grande%20-%20intro%20(end%20of%20the%20world)%20(extended)%20(lyric%20visualizer).mp3";
