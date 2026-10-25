@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <!-- ป้องกัน Safari ทำตัวเลขเป็นลิงก์สีน้ำเงิน -->
   <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
   <title>Nangmilo ♡</title>
 
@@ -17,7 +16,6 @@
 
   <style>
     :root {
-      /* โทนสีตามภาพพาเลท */
       --color-charcoal: #545258;
       --color-grey-soft: #8e8b94;
       --color-grey-light: #dcd7dc;
@@ -52,7 +50,6 @@
       overflow-x: hidden;
     }
 
-    /* ป้องกันสีน้ำเงินบน Safari iOS สำหรับตัวเลขทุกจุด */
     a[href^="tel"], span, div, p {
       color: inherit;
       text-decoration: none !important;
@@ -65,7 +62,7 @@
       z-index: 2;
     }
 
-    /* แถบด้านบน: ปุ่มสามขีด + เมนูแท็บ + เพลง */
+    /* แถบด้านบน */
     .top-header {
       display: flex;
       align-items: center;
@@ -129,7 +126,7 @@
       font-weight: 700;
     }
 
-    /* เมนูเลื่อนด้านข้าง (Side Drawer) */
+    /* Side Drawer */
     .side-drawer {
       position: fixed;
       top: 0;
@@ -416,7 +413,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
     }
 
-    /* บังคับสีข้อความตัวเลขบัญชีให้เป็นสีชาร์โคล ไม่เป็นสีน้ำเงิน */
     .bank-acc-num, .wallet-acc-num {
       color: var(--color-charcoal) !important;
       font-weight: 700;
@@ -461,7 +457,77 @@
     }
     .slip-uploader-box:active { background: #f2edf0; }
 
-    /* หน้า 4: ประวัติสั่งซื้อ */
+    /* หน้า 4: แท็บ Review (รีวิวลูกค้า) */
+    .review-form-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-tone);
+      border-radius: 22px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    }
+    .star-select-box {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 8px 0 14px;
+    }
+    .star-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease;
+    }
+    .star-btn svg {
+      width: 28px;
+      height: 28px;
+      fill: #e8e4e7;
+      stroke: #aba6b0;
+      stroke-width: 1.2;
+      transition: fill 0.15s ease, stroke 0.15s ease, transform 0.15s ease;
+    }
+    .star-btn.active svg {
+      fill: var(--color-charcoal);
+      stroke: #333136;
+      transform: scale(1.08);
+      filter: drop-shadow(0 2px 6px rgba(84, 82, 88, 0.35));
+    }
+
+    .review-item-card {
+      background: #ffffff;
+      border: 1.5px solid var(--border-tone);
+      border-radius: 18px;
+      padding: 14px;
+      margin-bottom: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+    }
+    .review-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .review-stars-display {
+      display: flex;
+      gap: 3px;
+    }
+    .review-stars-display svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--color-charcoal);
+    }
+    .review-text-msg {
+      font-size: 12.5px;
+      color: var(--text-dark);
+      margin-top: 6px;
+      line-height: 1.55;
+      white-space: pre-line;
+    }
+
+    /* หน้า 5: ประวัติสั่งซื้อ */
     .order-history-card {
       background: #ffffff;
       border: 1.5px solid var(--border-tone);
@@ -519,7 +585,7 @@
     }
     .btn-main:active { transform: scale(0.98); }
 
-    .input-field {
+    .input-field, .textarea-field {
       width: 100%;
       border: 1.5px solid var(--border-tone);
       border-radius: 14px;
@@ -530,7 +596,7 @@
       background: #ffffff;
       color: var(--text-dark);
     }
-    .input-field:focus { border-color: var(--color-charcoal); }
+    .input-field:focus, .textarea-field:focus { border-color: var(--color-charcoal); }
 
     .auth-toggle-link {
       font-size: 12px;
@@ -548,7 +614,7 @@
   <!-- เพลง Ariana Grande - intro -->
   <audio id="bgMusic" loop preload="auto" src="https://file.garden/asG8Gt-rqWIpi3II/Ariana%20Grande%20-%20intro%20(end%20of%20the%20world)%20(extended)%20(lyric%20visualizer).mp3"></audio>
 
-  <!-- รูปลอย 2tryl9.png -->
+  <!-- รูปลอย IMG_4400.png -->
   <div class="floating-layer" id="floatContainer"></div>
 
   <!-- แถบเมนูด้านข้าง (Drawer) -->
@@ -567,11 +633,12 @@
     </div>
 
     <div class="drawer-nav-list">
-      <button type="button" class="drawer-nav-btn active" id="drawer-btn-profile" onclick="switchNavTab('profile')">♡ home (โปรไฟล์ร้าน)</button>
-      <button type="button" class="drawer-nav-btn" id="drawer-btn-apps" onclick="switchNavTab('apps')">♡ nangmilo shop ♡</button>
-      <button type="button" class="drawer-nav-btn" id="drawer-btn-topup" onclick="switchNavTab('topup')">♡ payment ♡</button>
-      <button type="button" class="drawer-nav-btn" id="drawer-btn-history" onclick="switchNavTab('history')">♡ ประวัติการสั่งซื้อ</button>
-      <button type="button" class="drawer-nav-btn" id="drawerAuthBtn" onclick="openLoginModal()">♡ เข้าสู่ระบบ</button>
+      <button type="button" class="drawer-nav-btn active" id="drawer-btn-profile" onclick="switchNavTab('profile')">🏠 home (โปรไฟล์ร้าน)</button>
+      <button type="button" class="drawer-nav-btn" id="drawer-btn-apps" onclick="switchNavTab('apps')">📱 nangmilo shop ♡</button>
+      <button type="button" class="drawer-nav-btn" id="drawer-btn-topup" onclick="switchNavTab('topup')">💸 payment ♡</button>
+      <button type="button" class="drawer-nav-btn" id="drawer-btn-review" onclick="switchNavTab('review')">⭐ review ♡ (รีวิวร้าน)</button>
+      <button type="button" class="drawer-nav-btn" id="drawer-btn-history" onclick="switchNavTab('history')">📜 ประวัติการสั่งซื้อ</button>
+      <button type="button" class="drawer-nav-btn" id="drawerAuthBtn" onclick="openLoginModal()">🔑 เข้าสู่ระบบ</button>
       <button type="button" class="drawer-nav-btn" id="drawerRegisterBtn" onclick="openRegisterModal()" style="background:#faf7f8; border-color:var(--color-grey-soft); color:var(--color-charcoal);">✨ สมัครสมาชิกใหม่</button>
     </div>
   </div>
@@ -586,6 +653,7 @@
         <button type="button" class="nav-pill-btn active" id="nav-btn-profile" onclick="switchNavTab('profile')">home</button>
         <button type="button" class="nav-pill-btn" id="nav-btn-apps" onclick="switchNavTab('apps')">nangmilo shop ♡</button>
         <button type="button" class="nav-pill-btn" id="nav-btn-topup" onclick="switchNavTab('topup')">payment ♡</button>
+        <button type="button" class="nav-pill-btn" id="nav-btn-review" onclick="switchNavTab('review')">review ♡</button>
         <button type="button" class="nav-pill-btn" id="nav-btn-history" onclick="switchNavTab('history')">ประวัติการสั่งซื้อ</button>
       </div>
 
@@ -596,20 +664,19 @@
     <div class="tab-view active" id="tab-profile">
       <div class="glass-card">
         <div class="banner-wrap">
-          <img id="bannerImg" src="https://files.catbox.moe/qfm6ke.gif" alt="Banner">
+          <img id="bannerImg" src="https://file.garden/asG8Gt-rqWIpi3II/line_oa_chat_261025_185339.jpeg" alt="Banner">
         </div>
         <div class="profile-wrap">
-          <img id="profileImg" src="https://files.catbox.moe/eugyqk.jpeg" alt="Profile">
+          <img id="profileImg" src="https://file.garden/asG8Gt-rqWIpi3II/line_oa_chat_261025_185325.jpeg" alt="Profile">
         </div>
         <h1 class="shop-name-title" id="shopNameText">Nangmilo</h1>
         <div class="shop-bio-box" id="shopBioText">สวัสดีค่าเว็ปร้านนังไมโลเองงย้ายมาในนี้ หลังซื้อขายบริการฝาก+1ให้ทีนะคะ ขอบคุณมากๆที่สนับสนุนร้านเราค่ะ รับทำป้ายเครดิต ป้ายidentity v ป้ายต่างๆสามารถสอบถามเพิ่มเติมได้ค่า
 มีปัญหาแจ้งไลน์ siamfineshyt  ไม่มี @ ค่ะ ♡</div>
         
-        <!-- กล่องกดลิงก์ โดเนท -->
-        <a href="https://ezdn.app/holymoney" target="_blank" class="action-link-btn btn-donate">Donate click ♡
+        <a href="https://ezdn.app/holymoney" target="_blank" class="action-link-btn btn-donate">
+          🎁 Donate click ♡
         </a>
 
-        <!-- กล่องกดลิงก์ LINE -->
         <a href="https://line.me/ti/p/sVv-sPte7r" target="_blank" class="action-link-btn btn-line">
           💬 ติดต่อ LINE (siamfineshyt)
         </a>
@@ -636,29 +703,25 @@
           payment ♡
         </h2>
 
-        <!-- กล่องข้อความอันใหญ่ (ป้องกันสีน้ำเงิน) -->
         <div class="payment-main-box">payment nangmilo shop ♡
 
 k-bank : <span class="bank-acc-num">1613322163</span>
 wallet : <span class="wallet-acc-num">0863121107</span></div>
 
-        <!-- กล่องคัดลอกเลขบัญชี และวอลเล็ต (ป้องกันสีน้ำเงิน) -->
         <div class="copy-pill-btn" onclick="copyText('1613322163', 'คัดลอกเลขบัญชี kasikorn แล้ว')">
-          <span>♡ kasikorn : <span class="bank-acc-num">1613322163</span></span>
+          <span>🏦 kasikorn : <span class="bank-acc-num">1613322163</span></span>
           <span style="color:var(--color-charcoal); font-size:12px; font-weight:700;">คัดลอก</span>
         </div>
         <div class="copy-pill-btn" onclick="copyText('0863121107', 'คัดลอกเบอร์ wlt แล้ว')">
-          <span>♡ wlt: <span class="wallet-acc-num">0863121107</span></span>
+          <span>👛 wlt: <span class="wallet-acc-num">0863121107</span></span>
           <span style="color:var(--color-charcoal); font-size:12px; font-weight:700;">คัดลอก</span>
         </div>
 
-        <!-- กล่องใส่ฟอร์ม และคัดลอกคำว่า ใช้บริการกับร้านนังไมโล -->
         <div class="copy-pill-btn" onclick="copyText('ใช้บริการกับร้านนังไมโล', 'คัดลอกข้อความโน้ตเรียบร้อยแล้วค่ะ')">
-          <span>รบกวนโน้ตสลิป : ใช้บริการกับร้านนังไมโล</span>
+          <span>📝 รบกวนโน้ตสลิป : ใช้บริการกับร้านนังไมโล</span>
           <span style="color:var(--color-charcoal); font-size:12px; font-weight:700;">คัดลอก</span>
         </div>
 
-        <!-- กล่องรับซอง TrueMoney Wallet -->
         <div class="voucher-card-box">
           <div style="font-weight:700; font-size:14px; color:var(--color-charcoal); margin-bottom:4px;">🧧 เติมเงินด้วยซองของขวัญ TrueMoney Wallet</div>
           <div style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">สร้างซองของขวัญแบบแบ่งยอดเท่ากัน 1 คน แล้ววางลิงก์ซองที่นี่ได้เลยค่ะ</div>
@@ -666,7 +729,6 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
           <button type="button" class="btn-main" id="redeemVoucherBtn" onclick="handleRedeemVoucher()">รับเงินจากซองอัตโนมัติ</button>
         </div>
 
-        <!-- แนบสลิปตรวจอัตโนมัติผ่าน Thunder Solution API -->
         <div class="slip-uploader-box" onclick="document.getElementById('slipFileInput').click()">
           <span style="font-size:28px;">🧾</span>
           <div style="font-weight:700; color:var(--color-charcoal); margin-top:4px;" id="slipBoxTitleText">แนบสลิปโอนเงิน (Thunder Verify API)</div>
@@ -676,7 +738,43 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
       </div>
     </div>
 
-    <!-- 4. แท็บประวัติการสั่งซื้อ -->
+    <!-- 4. แท็บ review ♡ (รีวิวลูกค้า) -->
+    <div class="tab-view" id="tab-review">
+      <div class="glass-card">
+        <h2 style="font-size:16.5px; font-weight:700; color:var(--color-charcoal); text-align:center; margin-bottom:14px;">
+          ⭐ เขียนรีวิวให้ร้าน Nangmilo
+        </h2>
+
+        <div class="review-form-card">
+          <!-- ดาวโทนเดียวกับเว็บ -->
+          <div class="star-select-box">
+            <button type="button" class="star-btn active" onclick="setStars(1)">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </button>
+            <button type="button" class="star-btn active" onclick="setStars(2)">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </button>
+            <button type="button" class="star-btn active" onclick="setStars(3)">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </button>
+            <button type="button" class="star-btn active" onclick="setStars(4)">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </button>
+            <button type="button" class="star-btn active" onclick="setStars(5)">
+              <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </button>
+          </div>
+
+          <input type="text" id="reviewAuthor" class="input-field" placeholder="ชื่อของคุณ">
+          <textarea id="reviewContent" class="textarea-field" rows="3" placeholder="เขียนข้อความรีวิวประทับใจได้เลยนะคะ ♡"></textarea>
+          <button type="button" class="btn-main" id="submitReviewBtn" onclick="submitCustomerFeedback()">ส่งรีวิวให้ร้านค้า</button>
+        </div>
+
+        <div id="feedbackListContainer"></div>
+      </div>
+    </div>
+
+    <!-- 5. แท็บประวัติการสั่งซื้อ -->
     <div class="tab-view" id="tab-history">
       <div class="glass-card">
         <h2 style="font-size:16.5px; font-weight:700; color:var(--color-charcoal); text-align:center; margin-bottom:14px;">
@@ -772,14 +870,15 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
     const DB_USERS = "nangmilo_shop_users";
     const DB_SLIPS = "nangmilo_shop_slips";
     const DB_VOUCHERS = "nangmilo_shop_vouchers";
+    const DB_REVIEWS = "nangmilo_shop_reviews";
 
     const THUNDER_API_KEY = "9c131513-c62d-47ec-9200-a026b1a17dbf";
     const STORE_WALLET_PHONE = "0863121107";
 
-    // ลิงก์รูปภาพที่กำหนดตรง 100%
-    const DEFAULT_PROFILE_IMG = "https://files.catbox.moe/eugyqk.jpeg";
-    const DEFAULT_BANNER_IMG = "https://files.catbox.moe/qfm6ke.gif";
-    const DEFAULT_FLOAT_PNG = "https://files.catbox.moe/2tryl9.png";
+    // ลิงก์รูปภาพชุดใหม่ตรงตามที่บรีฟล่าสุด
+    const DEFAULT_PROFILE_IMG = "https://file.garden/asG8Gt-rqWIpi3II/line_oa_chat_261025_185325.jpeg";
+    const DEFAULT_BANNER_IMG = "https://file.garden/asG8Gt-rqWIpi3II/line_oa_chat_261025_185339.jpeg";
+    const DEFAULT_FLOAT_PNG = "https://file.garden/asG8Gt-rqWIpi3II/IMG_4400.png";
 
     let currentUser = null;
     let userData = { balance: 0 };
@@ -788,6 +887,7 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
     let selectedPlanIndex = -1;
     let userUnsub = null;
     let orderUnsub = null;
+    let selectedReviewStars = 5;
 
     // เพลง
     const music = document.getElementById('bgMusic');
@@ -995,13 +1095,12 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
 
     checkStoredUser();
 
-    // ดึงข้อมูลร้าน โดยล็อกรูปภาพให้ใช้รูปใหม่ที่ระบุแน่นอน
+    // ดึงข้อมูลร้าน ล็อกใช้รูปใหม่ชุดล่าสุด
     db.collection(DB_SITE).doc("config").onSnapshot(doc => {
       if (doc.exists) {
         const d = doc.data();
         if (d.shopName) document.getElementById('shopNameText').textContent = d.shopName;
         if (d.shopBio) document.getElementById('shopBioText').textContent = d.shopBio;
-        // ล็อกให้ใช้รูปใหม่ถ้าไม่มีการแก้ไขเป็นรูปอื่น
         document.getElementById('bannerImg').src = d.bannerImg || DEFAULT_BANNER_IMG;
         document.getElementById('profileImg').src = d.profileImg || DEFAULT_PROFILE_IMG;
         if (d.musicUrl && music.src !== d.musicUrl) music.src = d.musicUrl;
@@ -1191,6 +1290,80 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
       navigator.clipboard.writeText(str).then(() => alert(msg));
     }
 
+    // ระบบรีวิวหน้าร้าน
+    function setStars(val) {
+      selectedReviewStars = val;
+      const btns = document.querySelectorAll('.star-btn');
+      btns.forEach((btn, idx) => {
+        if (idx < val) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+    }
+
+    async function submitCustomerFeedback() {
+      const name = document.getElementById('reviewAuthor').value.trim();
+      const content = document.getElementById('reviewContent').value.trim();
+      const btn = document.getElementById('submitReviewBtn');
+
+      if (!name || !content) {
+        alert('กรุณากรอกชื่อและข้อความรีวิวด้วยนะคะ ♡');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'กำลังส่งรีวิว...';
+
+      try {
+        await db.collection(DB_REVIEWS).add({
+          name: name,
+          msg: content,
+          stars: selectedReviewStars,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        document.getElementById('reviewAuthor').value = '';
+        document.getElementById('reviewContent').value = '';
+        setStars(5);
+        alert('ขอบคุณสำหรับรีวิวนะคะ ทางร้านนังไมโลยินดีให้บริการเสมอค่ะ ♡');
+      } catch (err) {
+        alert('เกิดข้อผิดพลาดในการส่งรีวิว: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'ส่งรีวิวให้ร้านค้า';
+      }
+    }
+
+    // แสดงรีวิวลูกค้า Real-time
+    db.collection(DB_REVIEWS).orderBy("createdAt", "desc").onSnapshot(snap => {
+      const container = document.getElementById('feedbackListContainer');
+      container.innerHTML = '';
+
+      if (snap.empty) {
+        container.innerHTML = '<p style="text-align:center; color:var(--text-muted); font-size:13px; padding:15px;">ยังไม่มีรีวิว มารีวิวเป็นคนแรกได้เลยนะคะ ♡</p>';
+        return;
+      }
+
+      snap.forEach(doc => {
+        const d = doc.data();
+        const card = document.createElement('div');
+        card.className = 'review-item-card';
+
+        let starsSvg = '';
+        for (let i = 0; i < (d.stars || 5); i++) {
+          starsSvg += `<svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`;
+        }
+
+        card.innerHTML = `
+          <div class="review-header-row">
+            <span style="font-weight:700; font-size:13.5px; color:var(--color-charcoal);">${escapeHtml(d.name)}</span>
+            <div class="review-stars-display">${starsSvg}</div>
+          </div>
+          <div class="review-text-msg">${escapeHtml(d.msg)}</div>
+        `;
+        container.appendChild(card);
+      });
+    });
+
     // ตรวจสอบสลิปโอนเงินผ่าน Thunder Solution API
     async function handleThunderSlipUpload(event) {
       if (!currentUser) {
@@ -1273,7 +1446,7 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
       }
     }
 
-    // รับซองของขวัญ TrueMoney Wallet อัตโนมัติ เข้าเบอร์ 0863121107
+    // รับซองของขวัญ TrueMoney Wallet
     async function handleRedeemVoucher() {
       if (!currentUser) {
         alert('กรุณาเข้าสู่ระบบก่อนรับซองเติมเงินนะคะ ♡');
@@ -1344,7 +1517,7 @@ wallet : <span class="wallet-acc-num">0863121107</span></div>
       }
     }
 
-    // รูปลอย 2tryl9.png ตรงตามบรีฟ
+    // รูปลอย IMG_4400.png ตรงตามลิงก์ล่าสุด
     const floatBox = document.getElementById('floatContainer');
     setInterval(() => {
       const el = document.createElement('img');
